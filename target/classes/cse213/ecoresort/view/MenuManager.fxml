@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="cse213.ecoresort.controller.MenuManagerController"
+      spacing="15" style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+    
+    <!-- Header -->
+    <HBox style="-fx-background-color: #2196F3; -fx-padding: 15; -fx-background-radius: 5;">
+        <Label text="Menu Manager" 
+               style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Back to Home" 
+                onAction="#handleBackToHome"
+                style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-padding: 8 16;"/>
+    </HBox>
+    
+    <!-- Main Content -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <!-- Left Panel - Menu Items Table -->
+        <VBox spacing="10" minWidth="500" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 5;">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Menu Items" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #333;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Add New Item" onAction="#handleAddNewItem" 
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+            </HBox>
+            
+            <TableView fx:id="menuItemsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
+                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="80"/>
+                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="80"/>
+                    <TableColumn fx:id="stockColumn" text="Stock" prefWidth="60"/>
+                    <TableColumn fx:id="availableColumn" text="Available" prefWidth="80"/>
+                    <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+        
+        <!-- Right Panel - Add/Edit Form -->
+        <VBox spacing="10" minWidth="300" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 5;">
+            <Label text="Item Details" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #333;"/>
+            
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Name:" minWidth="80" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                    <TextField fx:id="nameField" promptText="Enter item name" prefWidth="200"/>
+                </HBox>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Type:" minWidth="80" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                    <ComboBox fx:id="typeComboBox" promptText="Select type" prefWidth="200"/>
+                </HBox>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Price:" minWidth="80" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                    <TextField fx:id="priceField" promptText="0.00" prefWidth="200"/>
+                </HBox>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Stock:" minWidth="80" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                    <TextField fx:id="stockField" promptText="0" prefWidth="200"/>
+                </HBox>
+                
+                <!-- Food-specific fields -->
+                <VBox fx:id="foodFields" spacing="10" visible="false">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Cuisine:" minWidth="80" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                        <TextField fx:id="cuisineField" promptText="Enter cuisine" prefWidth="200"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <CheckBox fx:id="vegetarianCheckBox" text="Vegetarian"/>
+                    </HBox>
+                </VBox>
+                
+                <!-- Drink-specific fields -->
+                <VBox fx:id="drinkFields" spacing="10" visible="false">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <CheckBox fx:id="alcoholicCheckBox" text="Alcoholic"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Temperature:" minWidth="80" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                        <ComboBox fx:id="temperatureComboBox" promptText="Select temperature" prefWidth="200"/>
+                    </HBox>
+                </VBox>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="availableCheckBox" text="Available" selected="true"/>
+                </HBox>
+                
+                <!-- Action Buttons -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Clear" onAction="#handleClearForm" 
+                            style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+                    <Button text="Save" onAction="#handleSaveItem" 
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                </HBox>
+                
+                <!-- Validation Messages -->
+                <Label fx:id="validationLabel" text="" style="-fx-text-fill: #f44336; -fx-font-size: 12;"/>
+            </VBox>
+        </VBox>
+    </HBox>
+    
+</VBox>

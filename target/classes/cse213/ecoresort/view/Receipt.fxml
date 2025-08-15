@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="cse213.ecoresort.controller.ReceiptController"
+      spacing="15" style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+    
+    <!-- Header -->
+    <VBox alignment="CENTER" style="-fx-background-color: #4CAF50; -fx-padding: 20; -fx-background-radius: 5;">
+        <Label text="Eco-Resort" 
+               style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;"/>
+        <Label text="Restaurant &amp; Bar" 
+               style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+        <Label text="RECEIPT" 
+               style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px;"/>
+    </VBox>
+    
+    <!-- Order Details -->
+    <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 5;">
+        <HBox spacing="20">
+            <VBox spacing="5">
+                <Label text="Table Number:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                <Label fx:id="tableNumberLabel" text="-" style="-fx-font-size: 14px;"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Order ID:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                <Label fx:id="orderIdLabel" text="-" style="-fx-font-size: 14px;"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Date:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                <Label fx:id="dateLabel" text="-" style="-fx-font-size: 14px;"/>
+            </VBox>
+        </HBox>
+        
+        <Separator/>
+        
+        <!-- Order Items -->
+                    <Label text="Order Items" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #333;"/>
+        <TableView fx:id="orderItemsTable" prefHeight="200">
+            <columns>
+                <TableColumn fx:id="itemNameColumn" text="Item" prefWidth="200"/>
+                <TableColumn fx:id="itemPriceColumn" text="Unit Price" prefWidth="100"/>
+                <TableColumn fx:id="itemQuantityColumn" text="Qty" prefWidth="60"/>
+                <TableColumn fx:id="itemTotalColumn" text="Total" prefWidth="100"/>
+            </columns>
+        </TableView>
+        
+        <Separator/>
+        
+        <!-- Totals -->
+        <VBox spacing="5" alignment="CENTER_RIGHT">
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Label text="Subtotal:" minWidth="100" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <Label fx:id="subtotalLabel" text="$0.00" style="-fx-font-size: 14px;" minWidth="100"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Label text="Tax (10%):" minWidth="100" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <Label fx:id="taxLabel" text="$0.00" style="-fx-font-size: 14px;" minWidth="100"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Label text="Discount:" minWidth="100" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <Label fx:id="discountLabel" text="$0.00" style="-fx-font-size: 14px;" minWidth="100"/>
+            </HBox>
+            <Separator/>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Label text="Total:" minWidth="100" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
+                <Label fx:id="totalLabel" text="$0.00" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2E7D32;" minWidth="100"/>
+            </HBox>
+        </VBox>
+        
+        <Separator/>
+        
+        <!-- Payment Info -->
+        <HBox spacing="20">
+            <VBox spacing="5">
+                <Label text="Payment Method:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                <Label fx:id="paymentMethodLabel" text="-" style="-fx-font-size: 14px;"/>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="Status:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                <Label fx:id="statusLabel" text="PAID" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #4CAF50;"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    
+    <!-- Footer -->
+    <VBox alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 15; -fx-background-radius: 5;">
+        <Label text="Thank you for dining with us!" 
+               style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #666;"/>
+        <Label text="Please come again" 
+               style="-fx-font-size: 14px; -fx-text-fill: #888;"/>
+    </VBox>
+    
+    <!-- Action Buttons -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Print Receipt" onAction="#handlePrint" 
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10 20;"/>
+        <Button text="Close" onAction="#handleClose" 
+                style="-fx-background-color: #666; -fx-text-fill: white; -fx-padding: 10 20;"/>
+    </HBox>
+    
+</VBox>
