@@ -29,11 +29,6 @@
                     onAction="#handleMenuManager"
                     style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 16; -fx-padding: 15 30; -fx-background-radius: 8;"
                     maxWidth="250" minWidth="250"/>
-            
-            <Button text="About" 
-                    onAction="#handleAbout"
-                    style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-size: 16; -fx-padding: 15 30; -fx-background-radius: 8;"
-                    maxWidth="250" minWidth="250"/>
         </VBox>
         
     </VBox>
