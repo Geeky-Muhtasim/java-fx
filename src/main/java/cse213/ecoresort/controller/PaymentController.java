@@ -37,8 +37,22 @@ public class PaymentController {
     
     @FXML
     public void initialize() {
-        setupPaymentMethodHandlers();
-        setupCashInputHandler();
+        System.out.println("DEBUG: PaymentController.initialize() called");
+        
+        try {
+            System.out.println("DEBUG: Setting up payment method handlers");
+            setupPaymentMethodHandlers();
+            System.out.println("DEBUG: Payment method handlers setup complete");
+            
+            System.out.println("DEBUG: Setting up cash input handler");
+            setupCashInputHandler();
+            System.out.println("DEBUG: Cash input handler setup complete");
+            
+            System.out.println("DEBUG: PaymentController initialization complete");
+        } catch (Exception e) {
+            System.err.println("ERROR: Exception during PaymentController initialization: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     private void setupPaymentMethodHandlers() {
@@ -147,20 +161,54 @@ public class PaymentController {
     }
     
     private void showReceipt() {
+        System.out.println("DEBUG: showReceipt() called");
+        System.out.println("DEBUG: Order details - ID: " + order.getId() + ", Table: " + order.getTableNo());
+        
         try {
+            System.out.println("DEBUG: Creating FXMLLoader for Receipt.fxml");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cse213/ecoresort/view/Receipt.fxml"));
+            
+            if (loader.getLocation() == null) {
+                System.err.println("ERROR: Receipt.fxml resource not found!");
+                showAlert("FXML Error", "Receipt.fxml not found - Could not locate Receipt.fxml resource");
+                return;
+            }
+            
+            System.out.println("DEBUG: Receipt.fxml resource found at: " + loader.getLocation());
+            System.out.println("DEBUG: Loading Receipt.fxml...");
+            
             Parent root = loader.load();
+            System.out.println("DEBUG: Receipt.fxml loaded successfully");
             
+            System.out.println("DEBUG: Getting ReceiptController instance");
             ReceiptController receiptController = loader.getController();
-            receiptController.setOrder(order);
+            if (receiptController == null) {
+                System.err.println("ERROR: ReceiptController is null!");
+                showAlert("Controller Error", "ReceiptController not found - Could not get ReceiptController instance");
+                return;
+            }
             
+            System.out.println("DEBUG: Setting order in ReceiptController");
+            receiptController.setOrder(order);
+            System.out.println("DEBUG: Order set successfully");
+            
+            System.out.println("DEBUG: Creating Receipt stage");
             Stage stage = new Stage();
             stage.setTitle("Receipt - Eco-Resort");
             stage.setScene(new Scene(root, 500, 600));
+            
+            System.out.println("DEBUG: Showing Receipt stage");
             stage.show();
+            System.out.println("DEBUG: Receipt stage displayed successfully");
             
         } catch (IOException e) {
+            System.err.println("ERROR: IOException while loading Receipt.fxml: " + e.getMessage());
+            e.printStackTrace();
             showAlert("Error", "Could not display receipt: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("ERROR: Unexpected error while loading Receipt.fxml: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Error", "Unexpected error: " + e.getMessage());
         }
     }
     

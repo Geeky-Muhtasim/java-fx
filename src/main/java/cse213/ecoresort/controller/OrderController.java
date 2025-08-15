@@ -52,11 +52,34 @@ public class OrderController {
     
     @FXML
     public void initialize() {
-        setupQuantitySpinner();
-        setupDiscountComboBox();
-        setupMenuItemsTable();
-        setupOrderLinesTable();
-        loadMenuItems();
+        System.out.println("DEBUG: OrderController.initialize() called");
+        
+        try {
+            System.out.println("DEBUG: Setting up quantity spinner");
+            setupQuantitySpinner();
+            System.out.println("DEBUG: Quantity spinner setup complete");
+            
+            System.out.println("DEBUG: Setting up discount combo box");
+            setupDiscountComboBox();
+            System.out.println("DEBUG: Discount combo box setup complete");
+            
+            System.out.println("DEBUG: Setting up menu items table");
+            setupMenuItemsTable();
+            System.out.println("DEBUG: Menu items table setup complete");
+            
+            System.out.println("DEBUG: Setting up order lines table");
+            setupOrderLinesTable();
+            System.out.println("DEBUG: Order lines table setup complete");
+            
+            System.out.println("DEBUG: Loading menu items");
+            loadMenuItems();
+            System.out.println("DEBUG: Menu items loaded: " + menuItems.size() + " items");
+            
+            System.out.println("DEBUG: OrderController initialization complete");
+        } catch (Exception e) {
+            System.err.println("ERROR: Exception during OrderController initialization: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     private void setupQuantitySpinner() {
@@ -217,28 +240,68 @@ public class OrderController {
     
     @FXML
     private void handleProceedToPayment() {
+        System.out.println("DEBUG: handleProceedToPayment() called");
+        
         if (currentOrder == null || currentOrder.getOrderLines().isEmpty()) {
+            System.out.println("DEBUG: No order or empty order - showing alert");
             showAlert("No Order", "Please create an order with items first.");
             return;
         }
         
+        System.out.println("DEBUG: Order validation passed, proceeding to payment");
+        System.out.println("DEBUG: Current order ID: " + currentOrder.getId());
+        System.out.println("DEBUG: Order lines count: " + currentOrder.getOrderLines().size());
+        
         try {
+            System.out.println("DEBUG: Creating FXMLLoader for Payment.fxml");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cse213/ecoresort/view/Payment.fxml"));
+            
+            if (loader.getLocation() == null) {
+                System.err.println("ERROR: Payment.fxml resource not found!");
+                showAlert("FXML Error", "Payment.fxml not found - Could not locate Payment.fxml resource");
+                return;
+            }
+            
+            System.out.println("DEBUG: Payment.fxml resource found at: " + loader.getLocation());
+            System.out.println("DEBUG: Loading Payment.fxml...");
+            
             Parent root = loader.load();
+            System.out.println("DEBUG: Payment.fxml loaded successfully");
             
+            System.out.println("DEBUG: Getting PaymentController instance");
             PaymentController paymentController = loader.getController();
-            paymentController.setOrder(currentOrder);
+            if (paymentController == null) {
+                System.err.println("ERROR: PaymentController is null!");
+                showAlert("Controller Error", "PaymentController not found - Could not get PaymentController instance");
+                return;
+            }
             
+            System.out.println("DEBUG: Setting order in PaymentController");
+            paymentController.setOrder(currentOrder);
+            System.out.println("DEBUG: Order set successfully");
+            
+            System.out.println("DEBUG: Creating Payment stage");
             Stage stage = new Stage();
             stage.setTitle("Payment - Eco-Resort");
             stage.setScene(new Scene(root, 600, 500));
+            
+            System.out.println("DEBUG: Showing Payment stage");
             stage.show();
+            System.out.println("DEBUG: Payment stage displayed successfully");
             
             // Close the order window
+            System.out.println("DEBUG: Closing Order window");
             ((Stage) tableNumberField.getScene().getWindow()).close();
+            System.out.println("DEBUG: Order window closed");
             
         } catch (IOException e) {
+            System.err.println("ERROR: IOException while loading Payment.fxml: " + e.getMessage());
+            e.printStackTrace();
             showAlert("Error", "Could not open payment screen: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("ERROR: Unexpected error while loading Payment.fxml: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Error", "Unexpected error: " + e.getMessage());
         }
     }
     

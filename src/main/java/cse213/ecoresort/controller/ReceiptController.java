@@ -35,7 +35,18 @@ public class ReceiptController {
     
     @FXML
     public void initialize() {
-        setupOrderItemsTable();
+        System.out.println("DEBUG: ReceiptController.initialize() called");
+        
+        try {
+            System.out.println("DEBUG: Setting up order items table");
+            setupOrderItemsTable();
+            System.out.println("DEBUG: Order items table setup complete");
+            
+            System.out.println("DEBUG: ReceiptController initialization complete");
+        } catch (Exception e) {
+            System.err.println("ERROR: Exception during ReceiptController initialization: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     private void setupOrderItemsTable() {
@@ -51,8 +62,23 @@ public class ReceiptController {
     }
     
     public void setOrder(Order order) {
+        System.out.println("DEBUG: ReceiptController.setOrder() called");
+        System.out.println("DEBUG: Order parameter: " + (order != null ? "not null" : "null"));
+        
+        if (order == null) {
+            System.err.println("ERROR: Order is null in setOrder method");
+            return;
+        }
+        
+        System.out.println("DEBUG: Order details - ID: " + order.getId() + ", Table: " + order.getTableNo());
+        System.out.println("DEBUG: Order lines count: " + order.getOrderLines().size());
+        
         this.order = order;
+        System.out.println("DEBUG: Order assigned to controller");
+        
+        System.out.println("DEBUG: Calling updateDisplay()");
         updateDisplay();
+        System.out.println("DEBUG: updateDisplay() completed");
     }
     
     private void updateDisplay() {

@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="cse213.ecoresort.controller.ReceiptController"
       spacing="15" style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
     
-    <!-- Header -->
     <VBox alignment="CENTER" style="-fx-background-color: #4CAF50; -fx-padding: 20; -fx-background-radius: 5;">
         <Label text="Eco-Resort" 
                style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;"/>
@@ -19,7 +16,6 @@
                style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px;"/>
     </VBox>
     
-    <!-- Order Details -->
     <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 5;">
         <HBox spacing="20">
             <VBox spacing="5">
@@ -38,8 +34,7 @@
         
         <Separator/>
         
-        <!-- Order Items -->
-                    <Label text="Order Items" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #333;"/>
+        <Label text="Order Items" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #333;"/>
         <TableView fx:id="orderItemsTable" prefHeight="200">
             <columns>
                 <TableColumn fx:id="itemNameColumn" text="Item" prefWidth="200"/>
@@ -51,7 +46,6 @@
         
         <Separator/>
         
-        <!-- Totals -->
         <VBox spacing="5" alignment="CENTER_RIGHT">
             <HBox spacing="10" alignment="CENTER_RIGHT">
                 <Label text="Subtotal:" minWidth="100" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
@@ -74,7 +68,6 @@
         
         <Separator/>
         
-        <!-- Payment Info -->
         <HBox spacing="20">
             <VBox spacing="5">
                 <Label text="Payment Method:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
@@ -87,7 +80,6 @@
         </HBox>
     </VBox>
     
-    <!-- Footer -->
     <VBox alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 15; -fx-background-radius: 5;">
         <Label text="Thank you for dining with us!" 
                style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #666;"/>
@@ -95,7 +87,6 @@
                style="-fx-font-size: 14px; -fx-text-fill: #888;"/>
     </VBox>
     
-    <!-- Action Buttons -->
     <HBox spacing="15" alignment="CENTER">
         <Button text="Print Receipt" onAction="#handlePrint" 
                 style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10 20;"/>
